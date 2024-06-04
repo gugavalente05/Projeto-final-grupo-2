@@ -3,7 +3,7 @@
 import pygame
 
 width = 800  # Largura Janela
-height = 600 # Altura Janela
+height = 600 # Altura
 
 def load():
     global sys_font, clock

@@ -1,29 +1,41 @@
 #Executável Jogo Festejando Firme.
 
 import pygame
+width = 800
+height = 600
+hero_frame = 1
+hero_pos_x = 6
+hero_pos_y = 225
+hero_time = 0
 
-width = 800  # Largura Janela
-height = 600 # Altura Janela
+width = 1920  # Largura Janela
+height = 1080 # Altura Janela
 
 def load():
-    global sys_font, clock
-    sys_font = pygame.font.Font(pygame.font.get_default_font(), 20)
-    clock = pygame.time.Clock() 
+    global clock, sheet, spt_wdt, spt_hgt
+    clock = pygame.time.Clock()
+    sheet = pygame.image.load('PC_Computer_-_Party_Hard_-_Darius_Party_Killer-removebg-preview.png')
+    spt_wdt = sheet.get_width() / 8
+    spt_hgt = sheet.get_height() / 8
 
-
-def draw_screen(screen):   
-    # Preenche o fundo da tela com branco ⇒ (255,255,255)
-    screen.fill((255,255,255))
-
-    # Cria Imagem da String com cor preto ⇒ (0,0,0)
-    t = sys_font.render("Hello World", False, (0,0,0))
-
-    # Renderiza Texto (Desenha texto)
-    screen.blit(t, t.get_rect(top = 290, left=343))
 
 def update(dt):
-    pass # faz nada...
+    global hero_frame, hero_pos_x, hero_time
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_RIGHT]:
+        hero_pos_x = hero_pos_x + (0.1 * dt)
+        hero_time = hero_time + dt
+        if hero_time > 100:
+            hero_frame = hero_frame + 1
+            if hero_frame > 3:
+                hero_frame = 0
+            hero_time = 0
 
+
+def draw_screen(screen):
+    screen.fill((255,255,255))
+    #desenha o personagem usando o índice da animação (Seleção do sprite)
+    screen.blit(sheet,(hero_pos_x, hero_pos_y),(spt_wdt * hero_frame, 0 ,spt_wdt,spt_hgt))
 
 def main_loop(screen):  
     global clock

@@ -1,41 +1,79 @@
 #Executável Jogo Festejando Firme.
 
 import pygame
-width = 800
-height = 600
-hero_frame = 1
-hero_pos_x = 6
-hero_pos_y = 225
-hero_time = 0
+width = 1500
+height = 750
 
-width = 1000  # Largura Janela
-height = 800 # Altura Janela
+killer_walk = []
+killer_anim_frame = 1
+killer_pos_x = 300
+killer_pos_y = 225
+killer_anim_time = 0
 
 def load():
-    global clock, sheet, spt_wdt, spt_hgt
+    global clock, hero_walk
     clock = pygame.time.Clock()
-    sheet = pygame.image.load('PC_Computer_-_Party_Hard_-_Darius_Party_Killer-removebg-preview.png')
-    spt_wdt = sheet.get_width() 
-    spt_hgt = sheet.get_height()
+    for i in range(0, 5): #carrega as imagens da animação /  MUDAR PARA A QUANTIDADE DE IMAGENS range(1, x)
+        killer_walk.append(pygame.image.load("iller_Walk_0" + str(i) + ".png"))
 
 
 def update(dt):
-    global hero_frame, hero_pos_x, hero_time
+    global hero_walk, hero_anim_frame, hero_pos_x,hero_pos_y, hero_anim_time, offset
     keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_LEFT]:
+        offset=0
+        hero_pos_x = hero_pos_x + (-0.1 * dt) # movimenta o personagem
+        hero_anim_time = hero_anim_time + dt #incrementa o tempo usando dt
+        if hero_anim_time > 100: #quando acumular mais de 100 ms
+            hero_anim_frame = hero_anim_frame + 1 # avança para proximo frame
+            if hero_anim_frame > 3: # loop da animação
+                hero_anim_frame = 0
+            hero_anim_time = 0 #reinicializa a contagem do tempo
+        offset=0
+
+        
+
     if keys[pygame.K_RIGHT]:
-        hero_pos_x = hero_pos_x + (0.1 * dt)
-        hero_time = hero_time + dt
-        if hero_time > 100:
-            hero_frame = hero_frame + 1
-            if hero_frame > 3:
-                hero_frame = 0
-            hero_time = 0
+        offset=5
+        hero_pos_x = hero_pos_x + (0.1 * dt) # movimenta o personagem
+        hero_anim_time = hero_anim_time + dt #incrementa o tempo usando dt
+        if hero_anim_time > 100: #quando acumular mais de 100 ms
+            hero_anim_frame = hero_anim_frame + 1 # avança para proximo frame
+            if hero_anim_frame > 3: # loop da animação
+                hero_anim_frame = 0
+            hero_anim_time = 0 #reinicializa a contagem do tempo
+        offset=5
+
+    if keys[pygame.K_UP]:
+        offset=8
+        hero_pos_y = hero_pos_y - (0.1 * dt) # movimenta o personagem
+        hero_anim_time = hero_anim_time + dt #incrementa o tempo usando dt
+        if hero_anim_time > 100: #quando acumular mais de 100 ms
+            hero_anim_frame = hero_anim_frame + 1 # avança para proximo frame
+            if hero_anim_frame > 3: # loop da animação
+                hero_anim_frame = 0
+            hero_anim_time = 0 #reinicializa a contagem do tempo
+        offset=8
+
+
+
+    if keys[pygame.K_DOWN]:
+        offset=12
+        hero_pos_y = hero_pos_y + (0.1 * dt) # movimenta o personagem
+        hero_anim_time = hero_anim_time + dt #incrementa o tempo usando dt
+        if hero_anim_time > 100: #quando acumular mais de 100 ms
+            hero_anim_frame = hero_anim_frame + 1 # avança para proximo frame
+            if hero_anim_frame > 3: # loop da animação
+                hero_anim_frame = 0
+            hero_anim_time = 0 #reinicializa a contagem do tempo
+        offset=12
 
 
 def draw_screen(screen):
     screen.fill((255,255,255))
     #desenha o personagem usando o índice da animação (Seleção do sprite)
-    screen.blit(sheet,(hero_pos_x, hero_pos_y),(spt_wdt * hero_frame, 0 ,spt_wdt,spt_hgt))
+    screen.blit(hero_walk[hero_anim_frame], (hero_pos_x, hero_pos_y))
 
 def main_loop(screen):  
     global clock

@@ -8,15 +8,15 @@ hero_pos_x = 6
 hero_pos_y = 225
 hero_time = 0
 
-width = 1920  # Largura Janela
-height = 1080 # Altura Janela
+width = 1000  # Largura Janela
+height = 800 # Altura Janela
 
 def load():
     global clock, sheet, spt_wdt, spt_hgt
     clock = pygame.time.Clock()
     sheet = pygame.image.load('PC_Computer_-_Party_Hard_-_Darius_Party_Killer-removebg-preview.png')
-    spt_wdt = sheet.get_width() / 8
-    spt_hgt = sheet.get_height() / 8
+    spt_wdt = sheet.get_width() 
+    spt_hgt = sheet.get_height()
 
 
 def update(dt):

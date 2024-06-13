@@ -1,56 +1,8 @@
 import pygame
-import random
-from random import randint as r
 
-#---------------------------------------------------------------------
+width = 800  # Largura Janela
+height = 600 # Altura Janela
 
-# Parte killer(PEDRO)
-width = 1920
-height = 1080
-kiler_walk= []
-Sprt_Killer_Walking = {0:(0, 0, 20, 56),1:(20, 0, 20, 56),2:(40, 0, 20, 56),3:(60, 0, 20, 56),4:(80, 0, 20, 56),
-        5:((0, 60), (20, 120)),6:(20, 60, 20, 120),7:(40, 60, 20, 120),8:(60, 60, 20, 120),9:(80, 60, 20, 120)}
-Sprt_Killer_Killing = {0:(0, 0, 20, 56),1:(20, 0, 20, 56),2:(40, 0, 20, 56),3:(60, 0, 20, 56),4:(80, 0, 20, 56),
-        5:(86, 60, 21, 117),6:(60, 60, 21, 117),7:(40, 60, 21, 117),8:(20, 60, 21, 117),9:(0, 60, 21, 117)}
-killer_anim_frame = 0
-killer_pos_x = 860
-killer_pos_y = 800
-killer_anim_time = 1 # variavel para controle do tempo da animação
-offset = 0
-
-# Parte killer(PEDRO)
-
-#--------------------------------------------------------------------
-
-
-#--------------------------------------------------------------------
-
-# Parte Npc(GUSTAVO)
-
-npc = []
-spriteNpc = 0
-tileD = {}
-npc_anim_frame = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-npc_anim_time = [random.randint(0, 300) for _ in range(12)]  # intervalo de tempo inicial aleatório para cada NPC
-offset = 0
-posy_random = []
-posx_random = []
-flagD = [0 for _ in range(12)]
-
-
-
-for i in range(12):
-    posx_random.append(random.randint(850, 1100))
-    posy_random.append(random.randint(400,650))
-
-
-# Parte Npc(GUSTAVO)
-
-#------------------------------------------------------------------------------------------------
-
-
-#---------------------------------------------------------------------------------------------
-    # carregando os spritessheets do KILLER(PEDRO)
 def load():
     global clock, sheet,sheet_Killing, spt_wdt, spt_hgt, npc, sptD_wdtNpc, sptD_hgtNpc, sptA_wdtNpc, sptA_hgtNpc, sptM_wdtNpc, sptM_hgtNpc
     clock = pygame.time.Clock()
